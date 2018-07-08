@@ -1,0 +1,21 @@
+Sujet:
+Développez une page web qui offre une interface graphique ergonomique pour construire un json object générique (ajout/suppression/changement de type et de structure). Chaque clé du json -qui peut être imbriquée ou pas- peut contenir un objet de type (text, boolean, number, array ou object). Chaque changement dans le json construit doit être automatiquement persisté en local -sur la machine de l'utilisateur- de façon à permettre la réouverture automatique et la réédition du json si on quitte la page web.
+
+Language: Javascript, ReactJS idéalement
+
+L'usage de toute librairie open source est autorisé.
+
+Merci de me confirmer la bonne réception de cet email.
+
+Cordialement,
+-----------------------------------------------------------------------
+
+
+Components : 
+------------
+
+	*/ text
+	*/ boolean
+	*/ number
+	*/ array 
+	*/ object
