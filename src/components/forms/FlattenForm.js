@@ -25,7 +25,10 @@ class FlattenForm extends Component {
       } 
     }
 
-
+    /**
+    * extract state array/object items and send them to parent component 
+    * to update JSON object final format  
+    */
     onSubmit = (event) => {
 
       // <- prevent form submit from reloading the pagee.preventDefault();  
@@ -39,21 +42,20 @@ class FlattenForm extends Component {
       this.props.type === "Number" && (newItem.value = parseInt(newItem.value,10))
       this.props.type === "Boolean" && (newItem.value = this.valueRef.checked)
 
+      //reset all form fields
       event.target.reset();  
 
-      // invoke parent function to add item to State
+      // invoke parent function to add item to State (JSON final format)
       this.props.newItem(newItem);
 
       // then hide forme after submitting it
       this.onCancel();
     }
 
-    onCancel = () => { 
-      // on cancel hide current forme add type
-      // then hide forme after submitting it
-      this.props.onModify ? 
-          this.props.onModify() :  
-          this.props.onToggleForm(this.typeId(this.props.type))
+    // on cancel hide/display form add type after submit 
+    //using callback function "onToggleForm" with id of item form
+    onCancel = () => {  
+      this.props.onToggleForm(this.typeId(this.props.type))
     }
 
 
@@ -72,9 +74,7 @@ class FlattenForm extends Component {
                     <div className="form-group col-4 "  > 
                         <label className="" htmlFor="key"> {type} Key:</label>
                         <input  ref= {(keyRef) => { this.keyRef = keyRef }  } 
-                                type="text" placeholder="key" 
-                                value = {this.props.fixedPrty}
-                                readOnly={!!this.props.fixedPrty} 
+                                type="text" placeholder="key"  
                                 className="form-control" 
                                 required />
                     </div>
@@ -104,11 +104,9 @@ class FlattenForm extends Component {
  
 
 FlattenForm.propTypes = { 
-    type: PropTypes.string.isRequired,
-    fixedPrty: PropTypes.string,
-    newItem : PropTypes.func.isRequired,
-    onModify : PropTypes.func,
-    onToggleForm : PropTypes.func
+    type: PropTypes.string.isRequired, 
+    newItem : PropTypes.func.isRequired, 
+    onToggleForm : PropTypes.func.isRequired
 };
 
 export default FlattenForm;

@@ -17,22 +17,31 @@ class NestedForm extends Component {
         }
     } 
     
-    handleForm = (event) => {
+    /**
+    * extract state array/object items and send them to parent component 
+    * to update JSON object final format  
+    */
+    onSubmit = (event) => {
 
-      // <- prevent form submit from reloading the pagee.preventDefault();  
+      // <- prevent form submit from reloading the page  
       event.preventDefault(); 
     
       var newItem  = { 
         key : this.keyRef.value ,
         value : this.state[this.props.type]
       }
-   
+      // callback function 
       this.props.newItem(newItem);
 
       //hide form after submit
       this.onCancel()
     }
 
+
+    /** add item to state.array or state.object according to user submit 
+    *  form nested item (array or object)
+    *  parent/child callback function 
+    */
     onNewItem = (newItem) =>{  
         let {type} = this.props 
   
@@ -49,13 +58,13 @@ class NestedForm extends Component {
 
     }; 
 
+    // on cancel hide form add type after submit 
+    //using callback function "onToggleForm" with id of item form
     onCancel = () => {
-      // on cancel hide current forme add type
+      
       let id
-      this.props.type === "Array" ? id = 3 : id = 4
-      this.props.onModify ? 
-          this.props.onModify():
-          this.props.onToggleForm(id)  
+      this.props.type === "Array" ? id = 3 : id = 4 
+      this.props.onToggleForm(id)  
     }
 
 
@@ -67,13 +76,11 @@ class NestedForm extends Component {
                   <legend className="scheduler-border"  >
                       {pr.type} Informations
                   </legend>
-                  <div style={{marginLeft: 40}}> 
+                  <div style={{marginLeft: 30}}> 
                             <div className="row form-group"  > 
                                 <label className="col-3" htmlFor="key"> {pr.type} Key:</label>
                                 <input  ref= {(keyRef) => { this.keyRef = keyRef }  } 
                                         type="text" placeholder="key" 
-                                        value = {pr.fixedPrty}
-                                        readOnly={!!pr.fixedPrty} 
                                         className="form-control col-4"  />
                             </div>
                             <div className="form-group"  >  
@@ -84,7 +91,7 @@ class NestedForm extends Component {
                             <div  className="row ">
                               <button type="submit" 
                                       className="btn btn-link " 
-                                      onClick={this.handleForm}  >
+                                      onClick={this.onSubmit}  >
                                   <img  alt={"add item"} src={add} width="30"  />
                               </button>
                               <button   className="btn btn-link "
@@ -99,11 +106,9 @@ class NestedForm extends Component {
  
 
 NestedForm.propTypes = {  
-    type: PropTypes.string.isRequired,
-    fixedPrty: PropTypes.string,
-    newItem : PropTypes.func.isRequired,
-    onModify : PropTypes.func,
-    onToggleForm : PropTypes.func
+    type: PropTypes.string.isRequired, 
+    newItem : PropTypes.func.isRequired, 
+    onToggleForm : PropTypes.func.isRequired
 };
 
 

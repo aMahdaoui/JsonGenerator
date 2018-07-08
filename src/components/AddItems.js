@@ -18,13 +18,10 @@ class AddItems extends Component {
             formsDisplayed : [false, false, false, false, false]  
         }
     } 
-
-    // onChange = (event) => { 
-    //     let index = event.target.selectedIndex;
-    //     let optionElement = event.target.childNodes[index]
-    //     let id =  optionElement.getAttribute('id');    
-    // }
-
+ 
+    //Display/hide form add type after click add item button 
+    // "onToggleForm" with id of item form
+    
     onToggleForm = (idType) => {  
         let newForm = this.state.formsDisplayed 
         let id = parseInt(idType,10)
@@ -35,16 +32,11 @@ class AddItems extends Component {
         });    
     }
 
+    // call onToggleForm function with right item type id 
     prepareForm = (event) => { 
         event.preventDefault();
         let id = this.selectVal.value
-        this.onToggleForm(id)
-        //let newForm = this.state.formsDisplayed  
-        //let isDisplayed = !this.state.formsDisplayed[id]
-        // newForm.splice(id, 1,true) 
-        // this.setState({
-        //     formsDisplayed : newForm
-        // });  
+        this.onToggleForm(id)  
     }
 
     render ()   {
@@ -74,31 +66,37 @@ class AddItems extends Component {
                 </div> 
             </form>  
 
-            {formsDisplayed[0] 
-                && <FlattenForm fixedPrty ={pr.prty} type="Text" 
+            {
+            /*
+            * display right add type form according to selected value
+            * formsDisplayed[0] : string (FlattenForm)
+            * formsDisplayed[1] : number (FlattenForm)
+            * formsDisplayed[2] : bool   (FlattenForm)
+            * formsDisplayed[3] : array  (NestedForm)
+            * formsDisplayed[4] : object (NestedForm)
+            *
+            */
+
+            formsDisplayed[0] 
+                && <FlattenForm type="Text" 
                                 newItem={pr.newItem} 
-                                onToggleForm={this.onToggleForm}
-                                onModify={pr.onModify}/> }  
+                                onToggleForm={this.onToggleForm} /> }  
             {formsDisplayed[1] 
-                && <FlattenForm fixedPrty ={pr.prty} type="Number" 
+                && <FlattenForm type="Number" 
                                 newItem={pr.newItem}
-                                onToggleForm={this.onToggleForm}
-                                onModify={pr.onModify}/> } 
+                                onToggleForm={this.onToggleForm} /> } 
             {formsDisplayed[2] 
-                && <FlattenForm fixedPrty ={pr.prty} type="Boolean" 
+                && <FlattenForm type="Boolean" 
                                 newItem={pr.newItem}
-                                onToggleForm={this.onToggleForm}
-                                onModify={pr.onModify}/> } 
+                                onToggleForm={this.onToggleForm} /> } 
             {formsDisplayed[3] 
-                && <NestedForm  fixedPrty ={pr.prty} type="Array" 
+                && <NestedForm  type="Array" 
                                 newItem={pr.newItem}
-                                onToggleForm={this.onToggleForm}
-                                onModify={pr.onModify}/> } 
+                                onToggleForm={this.onToggleForm} /> } 
             {formsDisplayed[4] 
-                && <NestedForm  fixedPrty ={pr.prty} type="Object" 
+                && <NestedForm  type="Object" 
                                 newItem={pr.newItem}
-                                onToggleForm={this.onToggleForm}
-                                onModify={pr.onModify}/>} 
+                                onToggleForm={this.onToggleForm} />} 
         </div>
         );
     }
