@@ -25,7 +25,8 @@ class FlattenForm extends Component {
       } 
     }
 
-
+    // add item to the parent component state throught newItem props
+    //callback function
     onSubmit = (event) => {
 
       // <- prevent form submit from reloading the pagee.preventDefault();  
@@ -50,7 +51,8 @@ class FlattenForm extends Component {
 
     onCancel = () => { 
       // on cancel hide current forme add type
-      // then hide forme after submitting it
+      // then hide form after submitting it
+      // if form is for modify call onModify else onToggleForm
       this.props.onModify ? 
           this.props.onModify() :  
           this.props.onToggleForm(this.typeId(this.props.type))

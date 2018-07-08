@@ -15,8 +15,8 @@ class Item extends Component {
         }
     }
 
-    /* handle onClick event  button to display the component to modify item
-    *  components's name used to modify item is 'AddItem'
+    /* handle onClick event  button to display the component to modify item.
+    *  the components's name used to modify item is also 'AddItem'
     **/
     modify = (e) => { 
         this.setState({ 
@@ -27,6 +27,7 @@ class Item extends Component {
      
     render() { 
         let pr = this.props   
+        let itemType = typeof pr.value
         let {isModified} = this.state
         return (
         	<div> 
@@ -46,11 +47,11 @@ class Item extends Component {
                              <img src={remove} alt="remove item" width="27"  />
                         </button>
                     </span>  
-                    <span >{typeof pr.value} </span><br /><hr />
+                    <span > {itemType}  </span><br /><hr />
                     <h6> <span >"{pr.prte}"</span > :{ JSON.stringify (pr.value, null, 2)} </h6> 
                      {isModified && <div > 
                             <hr />
-                            <h6>chose item type to edit item</h6>
+                            <h6>chose item type to edit this  {itemType} </h6>
                             <AddItems   prty={pr.prte}
                                         newItem={pr.newItem} 
                                         onModify={this.modify}/>

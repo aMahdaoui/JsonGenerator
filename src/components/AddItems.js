@@ -15,16 +15,13 @@ class AddItems extends Component {
             //all item we want add are hidden at first time
             //5 arg correspond to 5 item e.g: 
             //(string,number,bool,array,object)
+            //e.g formsDisplayed[0]  means that addItem string form
+            // will be displayed 
             formsDisplayed : [false, false, false, false, false]  
         }
-    } 
+    }  
 
-    // onChange = (event) => { 
-    //     let index = event.target.selectedIndex;
-    //     let optionElement = event.target.childNodes[index]
-    //     let id =  optionElement.getAttribute('id');    
-    // }
-
+    // function formanage show/hide addItem forms
     onToggleForm = (idType) => {  
         let newForm = this.state.formsDisplayed 
         let id = parseInt(idType,10)
@@ -35,16 +32,11 @@ class AddItems extends Component {
         });    
     }
 
+    // select right addItem form to hide/show
     prepareForm = (event) => { 
         event.preventDefault();
         let id = this.selectVal.value
-        this.onToggleForm(id)
-        //let newForm = this.state.formsDisplayed  
-        //let isDisplayed = !this.state.formsDisplayed[id]
-        // newForm.splice(id, 1,true) 
-        // this.setState({
-        //     formsDisplayed : newForm
-        // });  
+        this.onToggleForm(id)  
     }
 
     render ()   {

@@ -2,8 +2,6 @@ import React, { Component }  from 'react';
 import PropTypes from 'prop-types';
 import AddItems from '../AddItems'; 
 
-
-
 import add from '../../images/add2.png';
 import cancel from '../../images/cancel.png';
 
@@ -11,13 +9,18 @@ class NestedForm extends Component {
 
     constructor(props) {
         super(props);
+        // for nested items store all its sub items in array/object (temporarly) , 
+        //then after submitting form its content will be transmitted to 
+        //parent component state 
         this.state = { 
           Array : [],
           Object : {}
         }
     } 
-    
-    handleForm = (event) => {
+
+    // add state array/object content to the parent component state 
+    //throught newItem props callback function
+    onSubmit = (event) => {
 
       // <- prevent form submit from reloading the pagee.preventDefault();  
       event.preventDefault(); 
@@ -33,6 +36,8 @@ class NestedForm extends Component {
       this.onCancel()
     }
 
+    // this function extract items submited throught addItem component
+    // and add it to state 
     onNewItem = (newItem) =>{  
         let {type} = this.props 
   
@@ -84,7 +89,7 @@ class NestedForm extends Component {
                             <div  className="row ">
                               <button type="submit" 
                                       className="btn btn-link " 
-                                      onClick={this.handleForm}  >
+                                      onClick={this.onSubmit}  >
                                   <img  alt={"add item"} src={add} width="30"  />
                               </button>
                               <button   className="btn btn-link "

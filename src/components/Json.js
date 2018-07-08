@@ -1,28 +1,19 @@
-import React, { Component } from 'react';
-//import _ from 'lodash'; 
+import React, { Component } from 'react'; 
  
-import AddItems from './AddItems';
-// import FeedForm from './forms/FeedForm';
-// import FlattenForm from './forms/FlattenForm';
-// import NestedForm from './forms/NestedForm';
-import FeedList from './FeedList'; 
+import AddItems from './AddItems'; 
+import ItemsList from './ItemsList'; 
 
-
-// import add from '../images/add.png';
-// import cancel from '../images/cancel.png';   
+    
 import '../css/bootstrap.min.css'; 
 
 
-class Feed extends Component { 
+class Json extends Component { 
 
     constructor(props) {
         super(props);
         this.state = {
-        	text : "hello world",
-        	//array : ['hghghg',{'id':58, "isDisplay":true}],
-        	// numbers : [],
-        	// arrays : [],
-        	// objects : [],  
+        	//text : "hello world",
+        	//tab1 : ['hghghg',{'id':58, "isDisplay":true}]
         }
     }
 
@@ -47,38 +38,41 @@ class Feed extends Component {
         this.stateToLocalStorage();
     }
 
-
+    // get state from local
     localStorageToState = () => { 
 
-        // get the key's value from localStorage
+        // get state from localStorage
         let value = localStorage.getItem('state'); 
 
         // parse the localStorage string and setState
         this.setState(JSON.parse(value)) 
     }
 
+    // save state to local storage 
     stateToLocalStorage = () => { 
-        // save to localStorage
+        // save to localStorage 
         localStorage.setItem('state', JSON.stringify(this.state));
     }
     
 
 
 
-    // add item to array when end user submit form Add new item
+    // add item to state when end user submit form Add new item
     NewItem = (newItem) =>{  
  
         this.setState({...this.state, [newItem.key]: newItem.value})
  
     };
 
+    //remove item from state
     removeItem = (prteItem) =>{   
 
         delete this.state[prteItem] 
         this.setState(this.state);  
         	 
     }  
-
+    // display what we want, the final json object, 
+    // thanks to the state, its it!
     displayJSON =  () => {
         alert (JSON.stringify(this.state, null, 10 ))
     }
@@ -112,7 +106,7 @@ class Feed extends Component {
                         </span>
                     </p>
                     <pre className="p-3">
-                        <FeedList   items = {this.state}
+                        <ItemsList   items = {this.state}
                                     newItem={this.NewItem} 
                                     val="hello"
                                     removeItem={this.removeItem} />
@@ -126,4 +120,4 @@ class Feed extends Component {
  
  
 }
-export default Feed;
+export default Json;
